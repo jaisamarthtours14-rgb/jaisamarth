@@ -221,17 +221,23 @@
   function loadBookings() {
     document.getElementById('tableContainer').innerHTML = '<div class="loading"><span>⟳</span><br>Loading bookings...</div>';
 
-    const localBookings = JSON.parse(localStorage.getItem('jst_bookings') || '[]');
-
-    fetch(SHEET_URL + '?action=get', { method: 'GET', mode: 'no-cors' })
-      .then(() => {
+    const script = document.createElement('script');
+    window._jstCallback = function(data) {
+      document.head.removeChild(script);
+      if (Array.isArray(data) && data.length > 0) {
+        showBookings(data);
+      } else {
+        const localBookings = JSON.parse(localStorage.getItem('jst_bookings') || '[]');
         showBookings(localBookings);
-      })
-      .catch(() => {
-        showBookings(localBookings);
-      });
-
-    showBookings(localBookings);
+      }
+    };
+    script.onerror = function() {
+      document.head.removeChild(script);
+      const localBookings = JSON.parse(localStorage.getItem('jst_bookings') || '[]');
+      showBookings(localBookings);
+    };
+    script.src = SHEET_URL + '?action=get&callback=_jstCallback';
+    document.head.appendChild(script);
   }
 
   function showBookings(data) {
