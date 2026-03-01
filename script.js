@@ -1,5 +1,5 @@
 // ===== GOOGLE SHEETS URL - PASTE YOUR APPS SCRIPT URL HERE =====
-const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+const GOOGLE_SHEET_URL = 'https://script.google.com/u/0/home/projects/1vo_yLs6HYDz9iV73YY3IKgJLkHs27J_tUEImQJu7YZSejIKxYLyjE58y/edit';
 
 // ===== BOOKINGS STORAGE =====
 let bookings = JSON.parse(localStorage.getItem('jst_bookings') || '[]');
