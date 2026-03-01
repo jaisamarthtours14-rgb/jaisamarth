@@ -221,23 +221,52 @@
   function loadBookings() {
     document.getElementById('tableContainer').innerHTML = '<div class="loading"><span>⟳</span><br>Loading bookings...</div>';
 
-    const script = document.createElement('script');
-    window._jstCallback = function(data) {
-      document.head.removeChild(script);
-      if (Array.isArray(data) && data.length > 0) {
-        showBookings(data);
-      } else {
-        const localBookings = JSON.parse(localStorage.getItem('jst_bookings') || '[]');
-        showBookings(localBookings);
-      }
+    fetch(SHEET_URL + '?action=get')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length > 0) {
+          const normalized = data.map(normalizeRow);
+          showBookings(normalized);
+        } else {
+          showBookings([]);
+        }
+      })
+      .catch(() => {
+        document.getElementById('tableContainer').innerHTML = '<div class="no-data">Failed to load bookings. Check your internet connection and try again.</div>';
+      });
+  }
+
+  function normalizeRow(b) {
+    return {
+      id: b['Booking ID'] || b['id'] || '-',
+      submittedAt: formatDate(b['Submitted At'] || b['submittedAt'] || ''),
+      fullName: b['Full Name'] || b['fullName'] || '-',
+      mobile: String(b['Mobile '] || b['Mobile'] || b['mobile'] || '').trim(),
+      email: b['Email'] || b['email'] || '-',
+      vehicleType: (b['Vehicle Type '] || b['Vehicle Type'] || b['vehicleType'] || '-').trim(),
+      pickup: (b['Pickup Location'] || b['pickup'] || '-').trim(),
+      drop: (b['Drop Location '] || b['Drop Location'] || b['drop'] || '-').trim(),
+      travelDate: formatDate(b['Travel Date'] || b['travelDate'] || ''),
+      pickupTime: formatTime(b[' Pickup Time '] || b['Pickup Time'] || b['pickupTime'] || ''),
+      passengers: b['Passengers'] || b['passengers'] || '-',
+      tripType: b['Trip Type'] || b['tripType'] || '-',
+      requirements: b['Special Requirements'] || b['requirements'] || '-',
+      status: b['Status'] || b['status'] || 'Pending'
     };
-    script.onerror = function() {
-      document.head.removeChild(script);
-      const localBookings = JSON.parse(localStorage.getItem('jst_bookings') || '[]');
-      showBookings(localBookings);
-    };
-    script.src = SHEET_URL + '?action=get&callback=_jstCallback';
-    document.head.appendChild(script);
+  }
+
+  function formatDate(val) {
+    if (!val) return '-';
+    const d = new Date(val);
+    if (isNaN(d)) return val;
+    return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+  }
+
+  function formatTime(val) {
+    if (!val) return '';
+    const d = new Date(val);
+    if (isNaN(d)) return val;
+    return d.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
   }
 
   function showBookings(data) {
@@ -247,7 +276,7 @@
   }
 
   function updateStats(data) {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
     document.getElementById('statTotal').textContent = data.length;
     document.getElementById('statPending').textContent = data.filter(b => b.status === 'Pending').length;
     document.getElementById('statConfirmed').textContent = data.filter(b => b.status === 'Confirmed').length;
@@ -280,16 +309,16 @@
     let rows = sorted.map(b => {
       const badgeClass = b.status === 'Confirmed' ? 'badge-confirmed' : b.status === 'Completed' ? 'badge-completed' : 'badge-pending';
       return `<tr>
-        <td><strong>${b.id || '-'}</strong></td>
-        <td>${b.fullName || '-'}<br><small style="color:#888">${b.mobile || ''}</small></td>
-        <td>${b.pickup || '-'}</td>
-        <td>${b.drop || '-'}</td>
-        <td>${b.travelDate || '-'}<br><small style="color:#888">${b.pickupTime || ''}</small></td>
-        <td>${b.vehicleType || '-'}</td>
-        <td>${b.passengers || '-'}</td>
-        <td>${b.tripType || '-'}</td>
-        <td><span class="badge ${badgeClass}">${b.status || 'Pending'}</span></td>
-        <td>${b.submittedAt || '-'}</td>
+        <td><strong>${b.id}</strong></td>
+        <td>${b.fullName}<br><small style="color:#888">${b.mobile}</small></td>
+        <td>${b.pickup}</td>
+        <td>${b.drop}</td>
+        <td>${b.travelDate}<br><small style="color:#888">${b.pickupTime}</small></td>
+        <td>${b.vehicleType}</td>
+        <td>${b.passengers}</td>
+        <td>${b.tripType}</td>
+        <td><span class="badge ${badgeClass}">${b.status}</span></td>
+        <td>${b.submittedAt}</td>
       </tr>`;
     }).join('');
 
