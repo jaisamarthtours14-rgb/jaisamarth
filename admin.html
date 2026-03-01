@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Driver Dashboard – Jai Samarth Tour & Travel</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; min-height: 100vh; }
+
+    /* LOGIN */
+    #loginScreen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    }
+    .login-box {
+      background: #fff; border-radius: 16px; padding: 48px 40px;
+      width: 100%; max-width: 400px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    .login-box .logo { font-size: 48px; margin-bottom: 12px; }
+    .login-box h2 { color: #1a1a2e; font-size: 22px; margin-bottom: 6px; }
+    .login-box p { color: #888; font-size: 14px; margin-bottom: 32px; }
+    .login-box input {
+      width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0;
+      border-radius: 10px; font-size: 16px; margin-bottom: 16px;
+      outline: none; transition: border 0.2s;
+    }
+    .login-box input:focus { border-color: #ff6b35; }
+    .login-box button {
+      width: 100%; padding: 14px; background: #ff6b35; color: #fff;
+      border: none; border-radius: 10px; font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .login-box button:hover { background: #e55a25; }
+    .login-error { color: #e53935; font-size: 14px; margin-top: 10px; display: none; }
+
+    /* DASHBOARD */
+    #dashboard { display: none; }
+
+    .top-bar {
+      background: linear-gradient(135deg, #1a1a2e, #0f3460);
+      color: #fff; padding: 16px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .top-bar h1 { font-size: 20px; }
+    .top-bar span { font-size: 13px; color: #aaa; }
+    .top-bar-right { display: flex; gap: 10px; align-items: center; }
+    .btn-refresh {
+      background: #ff6b35; color: #fff; border: none;
+      padding: 8px 18px; border-radius: 8px; font-size: 14px;
+      cursor: pointer; font-weight: 600;
+    }
+    .btn-refresh:hover { background: #e55a25; }
+    .btn-logout {
+      background: transparent; color: #aaa; border: 1px solid #444;
+      padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer;
+    }
+    .btn-logout:hover { color: #fff; border-color: #fff; }
+
+    .stats-row {
+      display: flex; gap: 16px; padding: 20px 24px; flex-wrap: wrap;
+    }
+    .stat-box {
+      background: #fff; border-radius: 12px; padding: 20px 24px;
+      flex: 1; min-width: 140px; box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      border-left: 4px solid #ff6b35;
+    }
+    .stat-box.green { border-left-color: #43a047; }
+    .stat-box.blue { border-left-color: #1e88e5; }
+    .stat-box.orange { border-left-color: #fb8c00; }
+    .stat-box h3 { font-size: 28px; color: #1a1a2e; font-weight: 800; }
+    .stat-box p { font-size: 13px; color: #888; margin-top: 4px; }
+
+    .controls {
+      display: flex; gap: 12px; padding: 0 24px 16px; flex-wrap: wrap; align-items: center;
+    }
+    .controls input, .controls select {
+      padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px;
+      font-size: 14px; outline: none; background: #fff;
+    }
+    .controls input { flex: 1; min-width: 200px; }
+
+    .table-wrap {
+      padding: 0 24px 40px; overflow-x: auto;
+    }
+    table {
+      width: 100%; border-collapse: collapse; background: #fff;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      min-width: 900px;
+    }
+    thead { background: #1a1a2e; color: #fff; }
+    thead th { padding: 14px 12px; font-size: 13px; text-align: left; white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
+    tbody tr:hover { background: #fff8f5; }
+    tbody td { padding: 12px; font-size: 13px; color: #333; vertical-align: top; }
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 20px;
+      font-size: 12px; font-weight: 600;
+    }
+    .badge-pending { background: #fff3e0; color: #e65100; }
+    .badge-confirmed { background: #e8f5e9; color: #2e7d32; }
+    .badge-completed { background: #e3f2fd; color: #1565c0; }
+
+    .no-data {
+      text-align: center; padding: 60px 20px; color: #aaa; font-size: 16px;
+    }
+    .loading {
+      text-align: center; padding: 60px 20px; color: #888; font-size: 15px;
+    }
+    .loading span {
+      display: inline-block; animation: spin 1s linear infinite;
+      font-size: 28px; margin-bottom: 10px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      .top-bar h1 { font-size: 16px; }
+      .stats-row { padding: 16px; }
+      .controls { padding: 0 16px 12px; }
+      .table-wrap { padding: 0 16px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="logo">🚗</div>
+    <h2>Driver Dashboard</h2>
+    <p>Jai Samarth Tour & Travel</p>
+    <input type="password" id="passwordInput" placeholder="Enter Password" onkeydown="if(event.key==='Enter') login()" />
+    <button onclick="login()">Login</button>
+    <div class="login-error" id="loginError">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class="top-bar">
+    <div>
+      <h1>🚗 Driver Dashboard</h1>
+      <span>Jai Samarth Tour & Travel</span>
+    </div>
+    <div class="top-bar-right">
+      <button class="btn-refresh" onclick="loadBookings()">⟳ Refresh</button>
+      <button class="btn-logout" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <h3 id="statTotal">0</h3>
+      <p>Total Bookings</p>
+    </div>
+    <div class="stat-box orange">
+      <h3 id="statPending">0</h3>
+      <p>Pending</p>
+    </div>
+    <div class="stat-box green">
+      <h3 id="statConfirmed">0</h3>
+      <p>Confirmed</p>
+    </div>
+    <div class="stat-box blue">
+      <h3 id="statToday">0</h3>
+      <p>Today's Bookings</p>
+    </div>
+  </div>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by name, mobile, pickup..." oninput="filterBookings()" />
+    <select id="statusFilter" onchange="filterBookings()">
+      <option value="">All Status</option>
+      <option value="Pending">Pending</option>
+      <option value="Confirmed">Confirmed</option>
+      <option value="Completed">Completed</option>
+    </select>
+  </div>
+
+  <div class="table-wrap">
+    <div id="tableContainer">
+      <div class="loading"><span>⟳</span><br>Loading bookings...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzxJbqFXbsBJ9ZyrKCjKMrnlkv0sSlP7GVy1z6Pr7xBTwJ_mQah617OQNXEpbn_qYoB/exec';
+  const PASSWORD = 'jst2024';
+  let allBookings = [];
+
+  function login() {
+    const val = document.getElementById('passwordInput').value;
+    if (val === PASSWORD) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      sessionStorage.setItem('jst_admin', '1');
+      loadBookings();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('jst_admin');
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('passwordInput').value = '';
+  }
+
+  if (sessionStorage.getItem('jst_admin') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadBookings();
+  }
+
+  function loadBookings() {
+    document.getElementById('tableContainer').innerHTML = '<div class="loading"><span>⟳</span><br>Loading bookings...</div>';
+
+    const localBookings = JSON.parse(localStorage.getItem('jst_bookings') || '[]');
+
+    fetch(SHEET_URL + '?action=get', { method: 'GET', mode: 'no-cors' })
+      .then(() => {
+        showBookings(localBookings);
+      })
+      .catch(() => {
+        showBookings(localBookings);
+      });
+
+    showBookings(localBookings);
+  }
+
+  function showBookings(data) {
+    allBookings = data;
+    updateStats(data);
+    renderTable(data);
+  }
+
+  function updateStats(data) {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('statTotal').textContent = data.length;
+    document.getElementById('statPending').textContent = data.filter(b => b.status === 'Pending').length;
+    document.getElementById('statConfirmed').textContent = data.filter(b => b.status === 'Confirmed').length;
+    document.getElementById('statToday').textContent = data.filter(b => b.travelDate === today).length;
+  }
+
+  function filterBookings() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const status = document.getElementById('statusFilter').value;
+    const filtered = allBookings.filter(b => {
+      const matchSearch = !search ||
+        (b.fullName || '').toLowerCase().includes(search) ||
+        (b.mobile || '').includes(search) ||
+        (b.pickup || '').toLowerCase().includes(search) ||
+        (b.drop || '').toLowerCase().includes(search);
+      const matchStatus = !status || b.status === status;
+      return matchSearch && matchStatus;
+    });
+    renderTable(filtered);
+  }
+
+  function renderTable(data) {
+    if (data.length === 0) {
+      document.getElementById('tableContainer').innerHTML = '<div class="no-data">No bookings found.</div>';
+      return;
+    }
+
+    const sorted = [...data].sort((a, b) => (b.id || '').localeCompare(a.id || ''));
+
+    let rows = sorted.map(b => {
+      const badgeClass = b.status === 'Confirmed' ? 'badge-confirmed' : b.status === 'Completed' ? 'badge-completed' : 'badge-pending';
+      return `<tr>
+        <td><strong>${b.id || '-'}</strong></td>
+        <td>${b.fullName || '-'}<br><small style="color:#888">${b.mobile || ''}</small></td>
+        <td>${b.pickup || '-'}</td>
+        <td>${b.drop || '-'}</td>
+        <td>${b.travelDate || '-'}<br><small style="color:#888">${b.pickupTime || ''}</small></td>
+        <td>${b.vehicleType || '-'}</td>
+        <td>${b.passengers || '-'}</td>
+        <td>${b.tripType || '-'}</td>
+        <td><span class="badge ${badgeClass}">${b.status || 'Pending'}</span></td>
+        <td>${b.submittedAt || '-'}</td>
+      </tr>`;
+    }).join('');
+
+    document.getElementById('tableContainer').innerHTML = `
+      <table>
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Customer</th>
+            <th>Pickup</th>
+            <th>Drop</th>
+            <th>Date & Time</th>
+            <th>Vehicle</th>
+            <th>Passengers</th>
+            <th>Trip Type</th>
+            <th>Status</th>
+            <th>Submitted At</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+  }
+</script>
+</body>
+</html>
