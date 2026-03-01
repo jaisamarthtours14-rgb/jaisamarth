@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jai Samarth Tours & Travels</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon"><i class="fas fa-om"></i></div>
+        <div class="logo-text">
+          <span class="logo-main">Jai Samarth</span>
+          <span class="logo-sub">Tours & Travels</span>
+        </div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="closeMenu()">Home</a></li>
+        <li><a href="#about" onclick="closeMenu()">About</a></li>
+        <li><a href="#services" onclick="closeMenu()">Services</a></li>
+        <li><a href="#fleet" onclick="closeMenu()">Our Fleet</a></li>
+        <li><a href="#destinations" onclick="closeMenu()">Destinations</a></li>
+        <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
+        <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        <li><a href="#booking" class="nav-book-btn" onclick="closeMenu()">Book Now</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-slider" id="heroSlider">
+      <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80')"></div>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920&q=80')"></div>
+      <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&q=80')"></div>
+    </div>
+    <div class="hero-content">
+      <!-- <div class="hero-badge"><i class="fas fa-star"></i>  <i class="fas fa-star"></i></div> -->
+      <h1 class="hero-title">
+        <span class="hero-title-main">Jai Samarth</span>
+        <span class="hero-title-sub">Tours & Travels</span>
+      </h1>
+      <p class="hero-desc">Your trusted travel partner for comfortable, safe & memorable journeys across India. Available 24/7 for all your travel needs.</p>
+      <div class="hero-badges">
+        <div class="badge-item"><i class="fas fa-clock"></i><span>24/7 Available</span></div>
+        <div class="badge-item"><i class="fas fa-shield-alt"></i><span>100% Safe</span></div>
+        <div class="badge-item"><i class="fas fa-rupee-sign"></i><span>Best Rates</span></div>
+        <div class="badge-item"><i class="fas fa-car"></i><span>Premium Fleet</span></div>
+      </div>
+      <div class="hero-btns">
+        <a href="#booking" class="btn-primary"><i class="fas fa-calendar-check"></i> Book Your Trip</a>
+        <a href="#fleet" class="btn-secondary"><i class="fas fa-car-side"></i> View Our Fleet</a>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-dot"></div>
+    </div>
+    <div class="slider-dots" id="sliderDots">
+      <span class="dot active" onclick="goToSlide(0)"></span>
+      <span class="dot" onclick="goToSlide(1)"></span>
+      <span class="dot" onclick="goToSlide(2)"></span>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="stats-strip">
+    <div class="stats-container">
+      <div class="stat-item">
+        <div class="stat-number" data-target="5000">0</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="20">0</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="15">0</div>
+        <div class="stat-label">Premium Vehicles</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="50">0</div>
+        <div class="stat-label">Destinations</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-images">
+          <div class="about-img-main">
+            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80" alt="Tour Bus" />
+          </div>
+          <div class="about-img-secondary">
+            <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400&q=80" alt="Travel" />
+          </div>
+          <div class="about-experience-badge">
+            <span class="exp-number">20+</span>
+            <span class="exp-text">Years of Excellence</span>
+          </div>
+        </div>
+        <div class="about-content">
+          <div class="section-tag">About Us</div>
+          <h2 class="section-title">We Make Your Journey <span class="highlight">Unforgettable</span></h2>
+          <p class="about-desc">Jai Samarth Tours & Travels has been serving travelers across India with dedication, comfort, and reliability. We believe every journey should be a cherished memory.</p>
+          <div class="about-features">
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+              <div class="feature-text">
+                <h4>Professional Drivers</h4>
+                <p>Experienced, licensed & courteous drivers for your safety</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-clock"></i></div>
+              <div class="feature-text">
+                <h4>24/7 Availability</h4>
+                <p>Round the clock service, any time, any destination</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+              <div class="feature-text">
+                <h4>Pan India Coverage</h4>
+                <p>Covering all major cities, pilgrimages & tourist spots</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="fas fa-headset"></i></div>
+              <div class="feature-text">
+                <h4>24/7 Customer Support</h4>
+                <p>Always here to assist you before, during & after your trip</p>
+              </div>
+            </div>
+          </div>
+          <a href="#booking" class="btn-primary">Plan Your Trip <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES SECTION -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">What We Offer</div>
+        <h2 class="section-title">Our <span class="highlight">Premium Services</span></h2>
+        <p class="section-desc">From local city rides to long-distance pilgrimages, we cover it all with comfort and care.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon-wrap" style="background: linear-gradient(135deg, #FF6B35, #FF8C42)">
+            <i class="fas fa-plane-departure"></i>
+          </div>
+          <h3>Airport Transfers</h3>
+          <p>Punctual, comfortable airport pickups and drops. Flight tracking included.</p>
+          <div class="service-tag">24/7 Available</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap" style="background: linear-gradient(135deg, #667eea, #764ba2)">
+            <i class="fas fa-pray"></i>
+          </div>
+          <h3>Pilgrimage Tours</h3>
+          <p>Sacred journeys to Shirdi, Tirupati, Vaishno Devi, Kedarnath & more.</p>
+          <div class="service-tag">Special Packages</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap" style="background: linear-gradient(135deg, #11998e, #38ef7d)">
+            <i class="fas fa-mountain"></i>
+          </div>
+          <h3>Hill Station Tours</h3>
+          <p>Explore Mahabaleshwar, Lonavala, Matheran & other scenic destinations.</p>
+          <div class="service-tag">Weekend Getaway</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap" style="background: linear-gradient(135deg, #f093fb, #f5576c)">
+            <i class="fas fa-rings-wedding"></i>
+          </div>
+          <h3>Wedding Transport</h3>
+          <p>Decorated vehicles for weddings, receptions & all special occasions.</p>
+          <div class="service-tag">Premium Service</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap" style="background: linear-gradient(135deg, #4facfe, #00f2fe)">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Corporate Travel</h3>
+          <p>Reliable corporate cab services, employee transport & business tours.</p>
+          <div class="service-tag">Corporate Plans</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon-wrap" style="background: linear-gradient(135deg, #fa709a, #fee140)">
+            <i class="fas fa-route"></i>
+          </div>
+          <h3>Outstation Trips</h3>
+          <p>One-way & round trips to any destination across Maharashtra & India.</p>
+          <div class="service-tag">Best Rates</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLEET SECTION -->
+  <section class="fleet" id="fleet">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Our Vehicles</div>
+        <h2 class="section-title">Our <span class="highlight">Premium Fleet</span></h2>
+        <p class="section-desc">Choose from our wide range of well-maintained, air-conditioned vehicles for every need and group size.</p>
+      </div>
+      <div class="fleet-grid">
+        <div class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500&q=80" alt="Sedan" />
+            <div class="fleet-badge">Most Popular</div>
+          </div>
+          <div class="fleet-info">
+            <h3>Sedan / Dzire</h3>
+            <div class="fleet-specs">
+              <span><i class="fas fa-users"></i> 4 Passengers</span>
+              <span><i class="fas fa-snowflake"></i> AC</span>
+              <span><i class="fas fa-suitcase"></i> 2 Bags</span>
+            </div>
+            <p>Perfect for small families & business travel. Comfortable & fuel efficient.</p>
+            <div class="fleet-price">Starting ₹12/km</div>
+            <a href="#booking" class="fleet-book-btn">Book Now</a>
+          </div>
+        </div>
+        <div class="fleet-card">
+          <div class="fleet-img-wrap">
+            <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500&q=80" alt="SUV" />
+            <div class="fleet-badge premium">Premium</div>
+          </div>
+          <div class="fleet-info">
+            <h3>SUV / Innova</h3>
+            <div class="fleet-specs">
+              <span><i class="fas fa-users"></i> 7 Passengers</span>
+              <span><i class="fas fa-snowflake"></i> AC</span>
+              <span><i class="fas fa-suitcase"></i> 4 Bags</span>
+            </div>
+            <p>Spacious & powerful SUV ideal for family trips & long outstation journeys.</p>
+            <div class="fleet-price">Starting ₹18/km</div>
+            <a href="#booking" class="fleet-book-btn">Book Now</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTINATIONS SECTION -->
+  <section class="destinations" id="destinations">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Explore India</div>
+        <h2 class="section-title">Popular <span class="highlight">Destinations</span></h2>
+        <p class="section-desc">We cover all major tourist spots, pilgrimages & scenic destinations across India.</p>
+      </div>
+      <div class="dest-grid">
+        <div class="dest-card large">
+          <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&q=80" alt="Shirdi" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <h3>Shirdi</h3>
+              <p><i class="fas fa-map-marker-alt"></i> Maharashtra</p>
+              <span class="dest-tag">Pilgrimage</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=500&q=80" alt="Mumbai" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <h3>Mumbai</h3>
+              <p><i class="fas fa-map-marker-alt"></i> Maharashtra</p>
+              <span class="dest-tag">City Tour</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1477587458883-47145ed94245?w=500&q=80" alt="Goa" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <h3>Goa</h3>
+              <p><i class="fas fa-map-marker-alt"></i> Goa</p>
+              <span class="dest-tag">Beach</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1609920658906-8223bd289001?w=500&q=80" alt="Mahabaleshwar" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <h3>Mahabaleshwar</h3>
+              <p><i class="fas fa-map-marker-alt"></i> Maharashtra</p>
+              <span class="dest-tag">Hill Station</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=500&q=80" alt="Agra" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <h3>Agra - Taj Mahal</h3>
+              <p><i class="fas fa-map-marker-alt"></i> Uttar Pradesh</p>
+              <span class="dest-tag">Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="dest-card">
+          <img src="https://images.unsplash.com/photo-1599661046289-e31897846e41?w=500&q=80" alt="Lonavala" />
+          <div class="dest-overlay">
+            <div class="dest-info">
+              <h3>Lonavala</h3>
+              <p><i class="fas fa-map-marker-alt"></i> Maharashtra</p>
+              <span class="dest-tag">Weekend Trip</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-us">
+    <div class="why-bg"></div>
+    <div class="container">
+      <div class="section-header light">
+        <div class="section-tag light-tag">Why Choose Us</div>
+        <h2 class="section-title white">Why Thousands Trust <span class="highlight-gold">Jai Samarth</span></h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Safety First</h3>
+          <p>All vehicles are GPS tracked, regularly serviced & drivers are background verified.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-clock"></i></div>
+          <h3>Always On Time</h3>
+          <p>We value your time. Our drivers are always punctual and ready before schedule.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-rupee-sign"></i></div>
+          <h3>Transparent Pricing</h3>
+          <p>No hidden charges. What you see is what you pay. Best rates guaranteed.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-headset"></i></div>
+          <h3>24/7 Support</h3>
+          <p>Our customer support team is available round the clock for any assistance.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-snowflake"></i></div>
+          <h3>AC Vehicles</h3>
+          <p>All our vehicles are fully air-conditioned for your comfort in all seasons.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-star"></i></div>
+          <h3>5-Star Rated</h3>
+          <p>Consistently rated 5 stars by our customers for service quality & comfort.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Customer Reviews</div>
+        <h2 class="section-title">What Our <span class="highlight">Customers Say</span></h2>
+      </div>
+      <div class="testimonials-slider" id="testimonialsSlider">
+        <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-card">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Excellent service! We booked an Innova for our Shirdi trip and the driver was very professional and punctual. Highly recommend Jai Samarth Tours!"</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">RK</div>
+              <div class="reviewer-info"><strong>Rajesh Kumar</strong><span>Pune, Maharashtra</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"We hired a tempo traveller for our family trip to Mahabaleshwar. The vehicle was clean, AC was perfect and the driver knew all the best spots. Amazing experience!"</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">PS</div>
+              <div class="reviewer-info"><strong>Priya Sharma</strong><span>Nashik, Maharashtra</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Used their airport transfer service multiple times. Always on time, very courteous drivers and the cars are spotlessly clean. Best travel company in the region!"</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">AM</div>
+              <div class="reviewer-info"><strong>Amit Mehta</strong><span>Mumbai, Maharashtra</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Booked a luxury car for my daughter's wedding. The decorated car was stunning and the driver was very professional. Made our special day even more memorable!"</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">SJ</div>
+              <div class="reviewer-info"><strong>Sunita Joshi</strong><span>Aurangabad, Maharashtra</span></div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+            <p>"Our corporate team of 15 people used their mini bus for an outstation trip. Excellent service, comfortable journey and very reasonable pricing. Will book again!"</p>
+            <div class="reviewer">
+              <div class="reviewer-avatar">VD</div>
+              <div class="reviewer-info"><strong>Vikram Desai</strong><span>Pune, Maharashtra</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-controls">
+        <button class="testi-btn" onclick="prevTestimonial()"><i class="fas fa-chevron-left"></i></button>
+        <div class="testi-dots" id="testiDots"></div>
+        <button class="testi-btn" onclick="nextTestimonial()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING SECTION -->
+  <section class="booking" id="booking">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Book Your Trip</div>
+        <h2 class="section-title">Reserve Your <span class="highlight">Journey Today</span></h2>
+        <p class="section-desc">Fill in the details below and we'll get back to you within 30 minutes with confirmation.</p>
+      </div>
+      <div class="booking-wrapper">
+        <div class="booking-info">
+          <h3>Why Book With Us?</h3>
+          <ul class="booking-perks">
+            <li><i class="fas fa-check-circle"></i> Instant confirmation within 30 mins</li>
+            <li><i class="fas fa-check-circle"></i> Free cancellation up to 24 hours</li>
+            <li><i class="fas fa-check-circle"></i> No advance payment required</li>
+            <li><i class="fas fa-check-circle"></i> 24/7 customer support</li>
+            <li><i class="fas fa-check-circle"></i> GPS tracked vehicles</li>
+            <li><i class="fas fa-check-circle"></i> Professional & verified drivers</li>
+            <li><i class="fas fa-check-circle"></i> All inclusive pricing</li>
+          </ul>
+          <div class="booking-contact-card">
+            <h4><i class="fas fa-phone-alt"></i> Call Us Directly</h4>
+            <a href="tel:+919168848427" class="phone-link">+91 91688 48427</a>
+            <a href="tel:+919168848427" class="phone-link">+91 91688 48427</a>
+            <p class="available-text"><i class="fas fa-circle pulse"></i> Available 24/7</p>
+          </div>
+        </div>
+        <div class="booking-form-wrap">
+          <form class="booking-form" id="bookingForm" onsubmit="handleBooking(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fas fa-user"></i> Full Name *</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-phone"></i> Mobile Number *</label>
+                <input type="tel" id="mobile" placeholder="+91 XXXXX XXXXX" required pattern="[0-9]{10}" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="email" placeholder="your@email.com" />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-car"></i> Vehicle Type *</label>
+                <select id="vehicleType" required>
+                  <option value="">Select Vehicle</option>
+                  <option value="Sedan / Dzire">Sedan / Dzire (4 Pax)</option>
+                  <option value="SUV / Innova">SUV / Innova (7 Pax)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fas fa-map-marker-alt"></i> Pickup Location *</label>
+                <input type="text" id="pickup" placeholder="Enter pickup address" required />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-map-pin"></i> Drop Location *</label>
+                <input type="text" id="drop" placeholder="Enter destination" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fas fa-calendar-alt"></i> Travel Date *</label>
+                <input type="date" id="travelDate" required />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-clock"></i> Pickup Time *</label>
+                <input type="time" id="pickupTime" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label><i class="fas fa-users"></i> Number of Passengers *</label>
+                <input type="number" id="passengers" placeholder="No. of passengers" min="1" max="50" required />
+              </div>
+              <div class="form-group">
+                <label><i class="fas fa-route"></i> Trip Type *</label>
+                <select id="tripType" required>
+                  <option value="">Select Trip Type</option>
+                  <option value="One Way">One Way</option>
+                  <option value="Round Trip">Round Trip</option>
+                  <option value="Multi Day">Multi Day Tour</option>
+                  <option value="Local">Local (City)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label><i class="fas fa-comment-alt"></i> Special Requirements</label>
+              <textarea id="requirements" placeholder="Any special requirements, stops, or notes..." rows="3"></textarea>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i> Submit Booking Request
+              </button>
+              <button type="button" class="btn-download" onclick="downloadBookings()" id="downloadBtn" style="display:none">
+                <i class="fas fa-file-excel"></i> Download All Bookings (Excel)
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="modal-icon"><i class="fas fa-check-circle"></i></div>
+      <h3>Booking Received!</h3>
+      <p>Thank you! Your booking request has been submitted successfully. Our team will contact you within <strong>30 minutes</strong> to confirm your trip.</p>
+      <div class="modal-details" id="modalDetails"></div>
+      <div class="modal-btns">
+        <button onclick="closeModal()" class="btn-primary">Great, Thanks!</button>
+        <button onclick="downloadBookings()" class="btn-secondary-modal"><i class="fas fa-download"></i> Download Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">Get In Touch</div>
+        <h2 class="section-title">Contact <span class="highlight">Us</span></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+          <h3>Call Us</h3>
+          <p>Available 24/7 for bookings & support</p>
+          <a href="tel:+919168848427">+91 91688 48427</a>
+          <a href="tel:+919168848427">+91 95296 27705</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+          <h3>WhatsApp</h3>
+          <p>Chat with us for quick responses</p>
+          <a href="https://wa.me/919168848427" target="_blank">+91 91688 48427</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <h3>Email Us</h3>
+          <p>Send us your queries anytime</p>
+          <a href="mailto:jaisamarthtours.14@gmail.com">jaisamarthtours.14@gmail.com</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h3>Our Office</h3>
+          <p>Visit us at our office</p>
+          <span>Pune, Maharashtra, India</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <div class="logo-icon"><i class="fas fa-om"></i></div>
+              <div class="logo-text">
+                <span class="logo-main">Jai Samarth</span>
+                <span class="logo-sub">Tours & Travels</span>
+              </div>
+            </div>
+            <p>Your trusted travel partner for comfortable, safe & memorable journeys across India. Available 24/7 for all your travel needs.</p>
+            <div class="social-links">
+              <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+              <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-links-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#fleet">Our Fleet</a></li>
+              <li><a href="#destinations">Destinations</a></li>
+              <li><a href="#booking">Book Now</a></li>
+            </ul>
+          </div>
+          <div class="footer-links-col">
+            <h4>Our Services</h4>
+            <ul>
+              <li><a href="#services">Airport Transfers</a></li>
+              <li><a href="#services">Pilgrimage Tours</a></li>
+              <li><a href="#services">Hill Station Tours</a></li>
+              <li><a href="#services">Wedding Transport</a></li>
+              <li><a href="#services">Corporate Travel</a></li>
+              <li><a href="#services">Outstation Trips</a></li>
+            </ul>
+          </div>
+          <div class="footer-contact-col">
+            <h4>Contact Info</h4>
+            <div class="footer-contact-item"><i class="fas fa-phone-alt"></i><span>+91 91688 48427</span></div>
+            <div class="footer-contact-item"><i class="fab fa-whatsapp"></i><span>+91 95296 27705</span></div>
+            <div class="footer-contact-item"><i class="fas fa-envelope"></i><span>jaisamarthtours.14@gmail.com</span></div>
+            <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i><span>Pune, Maharashtra, India</span></div>
+            <div class="footer-contact-item"><i class="fas fa-clock"></i><span>24/7 Available</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2025 Jai Samarth Tours & Travels. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color:#FF6B35"></i> for our valued customers.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING BUTTONS -->
+  <a href="https://wa.me/919168848427" class="float-whatsapp" target="_blank" title="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <a href="tel:+919168848427" class="float-call" title="Call Us Now">
+    <i class="fas fa-phone-alt"></i>
+  </a>
+  <button class="scroll-top" id="scrollTop" onclick="scrollToTop()" title="Back to Top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
